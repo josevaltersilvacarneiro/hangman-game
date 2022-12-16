@@ -7,9 +7,11 @@ char
 get_letter(char *secret_letters_found)
 {
 	char spoken_letter;
-	bool in = false;
+	bool in;
 
 	do {
+		in = false;
+
 		printf("Type the spoken letter: ");
 		scanf(" %c", &spoken_letter);
 
