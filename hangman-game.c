@@ -4,12 +4,23 @@
 #include <string.h>
 
 char
-get_letter(void)
+get_letter(char *secret_letters_found)
 {
 	char spoken_letter;
-		
-	printf("Type the spoken letter: ");
-	scanf(" %c", &spoken_letter);
+	bool in = false;
+
+	do {
+		printf("Type the spoken letter: ");
+		scanf(" %c", &spoken_letter);
+
+		while (*secret_letters_found) {
+			if (*secret_letters_found == spoken_letter) {
+				in = true;
+				break;
+			}
+			secret_letters_found++;
+		}
+	} while (in);
 
 	return spoken_letter;
 }
@@ -43,7 +54,7 @@ main(void)
 
 		update(secret_letters_found);
 
-		letter = get_letter();
+		letter = get_letter(secret_letters_found);
 
 		for (register int i = 0; i < strlen(secret_word); i++)
 			if (secret_word[i] == letter)
