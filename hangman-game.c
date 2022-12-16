@@ -3,6 +3,16 @@
 #include <stdbool.h>
 #include <string.h>
 
+#define MAX 5;
+
+int
+hung(const char *secret_word)
+{
+	static int hung = MAX + strlen(secret_word);
+
+	return --hung;
+}
+
 char
 get_letter(char *secret_letters_found)
 {
@@ -43,7 +53,7 @@ int
 main(void)
 {
 	char secret_word[20], secret_letters_found[20]; 
-	bool hit = false, hung = false;
+	bool hit = false;
 
 	sprintf(secret_word, "Melancia");
 
@@ -65,7 +75,7 @@ main(void)
 		if (strcmp(secret_letters_found, secret_word) == 0)
 			hit = true;
 
-	} while (!hit && !hung);
+	} while (!hit && hung(secret_word));
 
 	update(secret_letters_found);
 
