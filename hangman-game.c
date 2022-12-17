@@ -72,7 +72,7 @@ main(void)
 {
 	char secret_word[20], secret_letters_found[20];
 	unsigned int word_length;
-	bool hit = false, hung = true;
+	bool hit = false, hung = false;
 
 	sprintf(secret_word, "Melancia");
 	word_length = strlen(secret_word);
@@ -89,12 +89,12 @@ main(void)
 		found = take_guess(secret_word, secret_letters_found, word_length);
 
 		if (!found && failed())
-			hung = false;
+			hung = true;
 
 		if (strcmp(secret_letters_found, secret_word) == 0)
 			hit = true;
 
-	} while (!hit && hung);
+	} while (!hit && !hung);
 
 	update(secret_letters_found);
 
