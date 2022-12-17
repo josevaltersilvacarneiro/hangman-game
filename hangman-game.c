@@ -6,11 +6,11 @@
 #define MAX 5;
 
 int
-hung(const char *secret_word)
+failed(void)
 {
-	static int hung = MAX + strlen(secret_word);
-
-	return --hung;
+	static int hung = MAX;
+	
+	return !(--hung);
 }
 
 char
@@ -28,6 +28,7 @@ get_letter(char *secret_letters_found)
 		while (*secret_letters_found) {
 			if (*secret_letters_found == spoken_letter) {
 				in = true;
+
 				break;
 			}
 			secret_letters_found++;
@@ -52,8 +53,8 @@ update(char *secret_letters_found)
 int
 main(void)
 {
-	char secret_word[20], secret_letters_found[20]; 
-	bool hit = false;
+	char secret_word[20], secret_letters_found[20];
+	bool hit = false, hung = true;
 
 	sprintf(secret_word, "Melancia");
 
@@ -63,19 +64,25 @@ main(void)
 
 	do {
 		char letter;
+		bool found = false;
 
 		update(secret_letters_found);
 
 		letter = get_letter(secret_letters_found);
 
 		for (register int i = 0; i < strlen(secret_word); i++)
-			if (secret_word[i] == letter)
+			if (secret_word[i] == letter) {
 				secret_letters_found[i] = letter;
+				found = true;
+			}
+
+		if (!found && failed())
+			hung = false;
 
 		if (strcmp(secret_letters_found, secret_word) == 0)
 			hit = true;
 
-	} while (!hit && hung(secret_word));
+	} while (!hit && hung);
 
 	update(secret_letters_found);
 
