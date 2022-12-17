@@ -1,10 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <stdbool.h>
 #include <string.h>
 #include "hangman-game.h"
 
 #define MAX 5;
+
+void
+get_secret_word(char *secret_word)
+{
+	FILE *fil;
+
+	int seconds = time(0);
+
+	unsigned int number_of_words;
+	unsigned int line;
+
+	srandom(seconds);
+
+	fil = fopen("words.txt", "r");
+
+	if (fil == 0) {
+		printf("There was an error\n");
+		exit(1);
+	}
+
+	fscanf(fil, "%d", &number_of_words);
+
+	line = random() % number_of_words;
+
+	for (register int i = 0; i < line; i++) {
+		fscanf(fil, "%s", secret_word);
+	}
+
+	fclose(fil);
+}
 
 int
 failed(void)
@@ -75,7 +106,8 @@ main(void)
 	unsigned int word_length;
 	bool hit = false, hung = false;
 
-	sprintf(secret_word, "Melancia");
+	get_secret_word(secret_word);
+
 	word_length = strlen(secret_word);
 
 	for (register int i = 0; i < word_length; i++)
