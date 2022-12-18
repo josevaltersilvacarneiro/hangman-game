@@ -45,7 +45,7 @@ push_secret_word(void)
 	printf("Type new secret word: ");
 	scanf("%s", new_secret_word);
 
-	file = fopen("words.txt", "a");
+	file = fopen("words.txt", "r+");
 	if (file == 0) {
 		printf("There was an error\n");
 		exit(1);
