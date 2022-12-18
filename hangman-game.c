@@ -38,12 +38,22 @@ get_secret_word(char *secret_word)
 void
 push_secret_word(void)
 {
+	/* 
+	 * This procedure stores a new secret word
+	 * in the file `words.txt`.
+	 *
+	 */
+
 	FILE *file;
 	unsigned int number_of_words;
 	char new_secret_word[20];
 
+	/* It waits for the user to type a new word and stores in new_secret_word */
+
 	printf("Type new secret word: ");
 	scanf("%s", new_secret_word);
+
+	/* It tries to open the file `words.txt` in read and write mode */
 
 	file = fopen("words.txt", "r+");
 	if (file == 0) {
@@ -51,16 +61,26 @@ push_secret_word(void)
 		exit(1);
 	}
 	
-	fscanf(file, "%d", &number_of_words);
-	number_of_words++;
+	fscanf(
+			file,
+			"%d",
+			&number_of_words
+		);                      // It reads the number of words in the file `words.txt`         //
+	number_of_words++;              // It increments plus                                           //
 	
-	fseek(file, 0, SEEK_SET);
-	fprintf(file, "%d", number_of_words);
-
-	fseek(file, 0, SEEK_END);
-	fprintf(file, "%s", new_secret_word);
-
-	fclose(file);
+	fseek(file, 0, SEEK_SET);       // It puts the pointer at the beginning                         //
+	fprintf(
+			file,
+			"%d",
+			number_of_words
+		);                      // It saves the new num of secret words in the file `words.txt` //
+	fseek(file, 0, SEEK_END);       // It puts the pointer at the end                               //
+	fprintf(
+			file,
+			"%s",
+			new_secret_word
+		);                      // It saves one more secret word in the file `words.txt`        //
+	fclose(file);                   // It closes the file                                           //
 }
 
 int
