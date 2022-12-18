@@ -5,8 +5,6 @@
 #include <string.h>
 #include "hangman-game.h"
 
-#define MAX 5;
-
 void
 get_secret_word(char *secret_word)
 {
@@ -68,7 +66,7 @@ push_secret_word(void)
 int
 failed(void)
 {
-	static int hung = MAX;
+	static int hung = MAX_NUMBER_OF_TRIES;
 	
 	return !(--hung);
 }
