@@ -125,6 +125,22 @@ update(char *secret_letters_found)
 	printf("%s\n", secret_letters_found);
 }
 
+void
+print_win(const char *secret_word)
+{
+	char new;
+
+	system("clear");
+
+	printf("You win! The secret word is %s\n", secret_word);
+
+	printf("Do you want to type a new secret word: ");
+	scanf(" %c", &new);
+
+	if (new == 'y')
+		push_secret_word();
+}
+
 int
 main(void)
 {
@@ -155,7 +171,8 @@ main(void)
 
 	} while (!hit && !hung);
 
-	update(secret_letters_found);
+	if (hit)
+		print_win(secret_word);
 
 	return 0;
 }
