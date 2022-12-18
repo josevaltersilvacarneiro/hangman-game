@@ -67,7 +67,6 @@ push_secret_word(void)
 			&number_of_words
 		);                      // It reads the number of words in the file `words.txt`         //
 	number_of_words++;              // It increments plus                                           //
-	
 	fseek(file, 0, SEEK_SET);       // It puts the pointer at the beginning                         //
 	fprintf(
 			file,
