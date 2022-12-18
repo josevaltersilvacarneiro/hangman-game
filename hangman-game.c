@@ -37,6 +37,34 @@ get_secret_word(char *secret_word)
 	fclose(fil);
 }
 
+void
+push_secret_word(void)
+{
+	FILE *file;
+	unsigned int number_of_words;
+	char new_secret_word[20];
+
+	printf("Type new secret word: ");
+	scanf("%s", new_secret_word);
+
+	file = fopen("words.txt", "a");
+	if (file == 0) {
+		printf("There was an error\n");
+		exit(1);
+	}
+	
+	fscanf(file, "%d", &number_of_words);
+	number_of_words++;
+	
+	fseek(file, 0, SEEK_SET);
+	fprintf(file, "%d", number_of_words);
+
+	fseek(file, 0, SEEK_END);
+	fprintf(file, "\n%s", new_secret_word);
+
+	fclose(file);
+}
+
 int
 failed(void)
 {
