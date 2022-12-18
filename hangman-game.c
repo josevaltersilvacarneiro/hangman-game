@@ -28,7 +28,7 @@ get_secret_word(char *secret_word)
 
 	fscanf(fil, "%d", &number_of_words);
 
-	line = random() % number_of_words;
+	line = random() % number_of_words + 1;
 
 	for (register int i = 0; i < line; i++) {
 		fscanf(fil, "%s", secret_word);
