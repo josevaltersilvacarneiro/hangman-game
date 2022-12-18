@@ -58,7 +58,7 @@ push_secret_word(void)
 	fprintf(file, "%d", number_of_words);
 
 	fseek(file, 0, SEEK_END);
-	fprintf(file, "\n%s", new_secret_word);
+	fprintf(file, "%s", new_secret_word);
 
 	fclose(file);
 }
