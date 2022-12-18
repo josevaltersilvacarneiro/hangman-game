@@ -141,6 +141,14 @@ print_win(const char *secret_word)
 		push_secret_word();
 }
 
+void
+print_loss(const char *secret_word)
+{
+	system("clear");
+
+	printf("What a pity! You lost\n");
+}
+
 int
 main(void)
 {
@@ -173,6 +181,8 @@ main(void)
 
 	if (hit)
 		print_win(secret_word);
+	else
+		print_loss(secret_word);
 
 	return 0;
 }
