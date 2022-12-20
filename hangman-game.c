@@ -117,6 +117,17 @@ failed(void)
 bool
 won(const char *secret_word, const char *typed_letters)
 {
+	/*
+	 * For the user to win the game, he needs to find
+	 * out all the characters that form the secret
+	 * word. This means that the num of characters
+	 * he found must be equal to the number of
+	 * characters of the secret word.
+	 *
+	 * This function returns `true` if the user
+	 * succeeded and returns `false` otherwise.
+	 */
+
 	unsigned int number_of_corrected_letters = 0;
 
 	for (register int i = 0; i < strlen(secret_word); i++)
