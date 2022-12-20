@@ -114,6 +114,26 @@ failed(void)
 	return !(--hung);
 }
 
+bool
+won(const char *secret_word, const char *typed_letters)
+{
+	unsigned int number_of_corrected_letters = 0;
+
+	for (register int i = 0; i < strlen(secret_word); i++)
+	{
+		bool found = false;
+
+		for (register int j = 0; j < strlen(typed_letters) && !found; j++)
+			if (*(secret_word + i) == *(typed_letters + j))
+			{
+				found = true;
+				number_of_corrected_letters++;
+			}
+	}
+
+	return number_of_corrected_letters == strlen(secret_word);
+}
+
 char
 get_letter(char *typed_letters)
 {
@@ -147,24 +167,32 @@ get_letter(char *typed_letters)
 }
 
 bool
-take_guess(const char *secret_word, char *secret_letters_found, unsigned int word_length)
+take_guess(const char *secret_word, char *typed_letters)
 {
-	char letter;
+	unsigned length;
 	bool found = false;
+	char letter;
 
-	letter = get_letter(secret_letters_found);
+	length = strlen(typed_letters);
 
-	for (register int i = 0; i < word_length; i++)
-		if (secret_word[i] == letter) {
-			secret_letters_found[i] = letter;
+	letter = get_letter(typed_letters);
+
+	typed_letters[length] = letter;
+	typed_letters[length + 1] = '\0';
+
+	while (*secret_word && !found) {
+
+		if (*secret_word == letter)
 			found = true;
-		}
+		
+		secret_word++;
+	}
 	
 	return found;
 }
 
 void
-update(char *secret_letters_found)
+update(const char *secret_word, const char *typed_letters)
 {
 	system("clear");
 
@@ -172,7 +200,19 @@ update(char *secret_letters_found)
 	printf("*          Hangman Game            *\n");
 	printf("************************************\n");
 
-	printf("%s\n", secret_letters_found);
+	while (*secret_word)
+	{
+		bool found = false;
+
+		for (register int i = 0; i < strlen(typed_letters) && !found; i++)
+			if (*secret_word == *(typed_letters + i))
+				found = true;
+
+		found ? printf("%c", *secret_word) : printf("_");
+
+		secret_word++;
+	}
+	printf("\n");
 }
 
 void
@@ -202,29 +242,22 @@ print_loss(const char *secret_word)
 int
 main(void)
 {
-	char secret_word[20], secret_letters_found[20];
-	unsigned int word_length;
+	char secret_word[20], typed_letters[25];
 	bool hit = false, hung = false;
 
 	get_secret_word(secret_word);
-
-	word_length = strlen(secret_word);
-
-	for (register int i = 0; i < word_length; i++)
-		secret_letters_found[i] = '_';
-	secret_letters_found[word_length] = '\0';
-
+	
 	do {
 		bool found;
 
-		update(secret_letters_found);
+		update(secret_word, typed_letters);
 
-		found = take_guess(secret_word, secret_letters_found, word_length);
+		found = take_guess(secret_word, typed_letters);
 
 		if (!found && failed())
 			hung = true;
 
-		if (strcmp(secret_letters_found, secret_word) == 0)
+		if (won(secret_word, typed_letters))
 			hit = true;
 
 	} while (!hit && !hung);
