@@ -174,10 +174,9 @@ take_guess(const char *secret_word, char *typed_letters)
 	bool found = false;
 	char letter;
 
-	length = strlen(typed_letters);
-
 	letter = get_letter(typed_letters);
 
+	length = strlen(typed_letters);
 	typed_letters[length] = letter;
 	typed_letters[length + 1] = '\0';
 
