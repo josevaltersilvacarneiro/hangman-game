@@ -126,12 +126,11 @@ get_letter(char *typed_letters)
 		printf("Type the spoken letter: ");
 		scanf(" %c", &typed_letter);
 
-		while (*typed_letters) {
-			if (*typed_letters == typed_letter) {
+		while (*typed_letters && !in) {
+
+			if (*typed_letters == typed_letter)
 				in = true;
 
-				break;
-			}
 			typed_letters++;
 		}
 	} while (in);
