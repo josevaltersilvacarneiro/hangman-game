@@ -117,6 +117,14 @@ failed(void)
 char
 get_letter(char *typed_letters)
 {
+	/*
+	 * This function receives as parameter a pointer
+	 * that points to the letters typed by the user.
+	 * It waits until the user enters a letter that
+	 * isn't in this set of letters entered by the
+	 * user. At the end, returns the letter.
+	 */
+
 	char typed_letter;
 	bool in;
 
