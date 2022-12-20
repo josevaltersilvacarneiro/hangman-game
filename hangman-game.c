@@ -90,6 +90,25 @@ push_secret_word(void)
 int
 failed(void)
 {
+	/*
+	 * This function should be called every time the
+	 * user types a letter that doens't belong
+	 * to the secret word.
+	 *
+	 * This function returns `true` if the number
+	 * of tries reached zero; else returns
+	 * `false`.
+	 *
+	 * Initially the `hung` variable is set
+	 * equal to `MAX_NUMBER_OF_TRIES`.
+	 * Every time the function is called
+	 * the variable `hung` is decremented
+	 * by one. As every positive num is
+	 * treated as true, it's enougth to
+	 * deny it to know if it has reached
+	 * zero and returns it.
+	 */
+
 	static int hung = MAX_NUMBER_OF_TRIES;
 	
 	return !(--hung);
