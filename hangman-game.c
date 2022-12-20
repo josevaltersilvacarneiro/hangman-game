@@ -115,28 +115,28 @@ failed(void)
 }
 
 char
-get_letter(char *secret_letters_found)
+get_letter(char *typed_letters)
 {
-	char spoken_letter;
+	char typed_letter;
 	bool in;
 
 	do {
 		in = false;
 
 		printf("Type the spoken letter: ");
-		scanf(" %c", &spoken_letter);
+		scanf(" %c", &typed_letter);
 
-		while (*secret_letters_found) {
-			if (*secret_letters_found == spoken_letter) {
+		while (*typed_letters) {
+			if (*typed_letters == typed_letter) {
 				in = true;
 
 				break;
 			}
-			secret_letters_found++;
+			typed_letters++;
 		}
 	} while (in);
 
-	return spoken_letter;
+	return typed_letter;
 }
 
 bool
