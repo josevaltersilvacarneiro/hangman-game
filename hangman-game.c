@@ -87,7 +87,7 @@ push_secret_word(void)
 	fclose(file);                   // It closes the file                                           //
 }
 
-int
+bool
 failed(void)
 {
 	/*
