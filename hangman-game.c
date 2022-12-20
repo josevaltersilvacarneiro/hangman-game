@@ -8,31 +8,37 @@
 void
 get_secret_word(char *secret_word)
 {
+	/*
+	 * This procedure gets a new secret word
+	 * from the file `words.txt`.
+	 */
+
 	FILE *fil;
-
 	int seconds = time(0);
-
 	unsigned int number_of_words;
 	unsigned int line;
 
 	srandom(seconds);
 
-	fil = fopen("words.txt", "r");
-
+	fil = fopen("words.txt", "r"); // It tries to open the file `words.txt` in read only mode //
 	if (fil == 0) {
 		printf("There was an error\n");
 		exit(1);
 	}
 
-	fscanf(fil, "%d", &number_of_words);
+	fscanf(
+			fil,
+			"%d",
+			&number_of_words
+		);                     // It gets the num of secret words in the file `words.txt` //
 
-	line = random() % number_of_words + 1;
+	line = random() % number_of_words + 1;    /* It draws a secret word */
 
-	for (register int i = 0; i < line; i++) {
+	for (register int i = 0; i < line; i++) { /* It gets the secret word drawn */
 		fscanf(fil, "%s", secret_word);
 	}
 
-	fclose(fil);
+	fclose(fil);                   // It closes the file                                      //
 }
 
 void
