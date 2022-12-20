@@ -267,8 +267,7 @@ main(void)
 
 		if (!found && failed())
 			hung = true;
-
-		if (won(secret_word, typed_letters))
+		else if (won(secret_word, typed_letters))
 			hit = true;
 
 	} while (!hit && !hung);
