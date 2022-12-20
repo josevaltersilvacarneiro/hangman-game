@@ -135,7 +135,7 @@ won(const char *secret_word, const char *typed_letters)
 }
 
 char
-get_letter(char *typed_letters)
+get_letter(const char *typed_letters)
 {
 	/*
 	 * This function receives as parameter a pointer
