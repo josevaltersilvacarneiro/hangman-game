@@ -148,14 +148,15 @@ get_letter(char *typed_letters)
 	char typed_letter;
 	bool in;
 
-	do {
+	do
+	{
 		in = false;
 
 		printf("Type the spoken letter: ");
 		scanf(" %c", &typed_letter);
 
-		while (*typed_letters && !in) {
-
+		while (*typed_letters && !in)
+		{
 			if (*typed_letters == typed_letter)
 				in = true;
 
@@ -180,8 +181,8 @@ take_guess(const char *secret_word, char *typed_letters)
 	typed_letters[length] = letter;
 	typed_letters[length + 1] = '\0';
 
-	while (*secret_word && !found) {
-
+	while (*secret_word && !found)
+	{
 		if (*secret_word == letter)
 			found = true;
 		
