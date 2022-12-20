@@ -47,7 +47,6 @@ push_secret_word(void)
 	/* 
 	 * This procedure stores a new secret word
 	 * in the file `words.txt`.
-	 *
 	 */
 
 	FILE *file;
