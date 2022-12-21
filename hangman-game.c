@@ -181,11 +181,23 @@ get_letter(const char *typed_letters)
 bool
 take_guess(const char *secret_word, char *typed_letters)
 {
+	/*
+	 * This function gets a new letter and stores it
+	 * in the memory pointed to by the typed_letters
+	 * pointer. If the letter belongs to the secret
+	 * word, returns `true`; else returns `false`.
+	 */
+
 	unsigned length;
 	bool found = false;
 	char letter;
 
 	letter = get_letter(typed_letters);
+
+	/*
+	 * It allocates enough memory to store a new letter
+	 * and moves the null character to the end.
+	 */
 
 	length = strlen(typed_letters);
 	typed_letters[length] = letter;
