@@ -71,7 +71,7 @@ gcc hangman-game.c -o hangman-game.exe
 <table>
 	<tr>
 		<td>
-			{Debian}[https://www.debian.org]
+			[Debian](https://www.debian.org)
 		</td>
 		<td>
 			11.6
@@ -79,7 +79,7 @@ gcc hangman-game.c -o hangman-game.exe
 	</tr>
 	<tr>
 		<td>
-			{GCC}[https://gcc.gnu.org]
+			[GCC](https://gcc.gnu.org)
 		</td>
 		<td>
 			10.2.1
@@ -87,7 +87,7 @@ gcc hangman-game.c -o hangman-game.exe
 	</tr>
 	<tr>
 		<td>
-			{Vim}[https://www.vim.org]
+			[Vim](https://www.vim.org)
 		</td>
 		<td>
 			8.2
